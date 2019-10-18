@@ -1,6 +1,7 @@
 package com.example.alertika;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.alertika.data.EmergencyContactsDbHelper;
@@ -19,7 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity {
-
+    SharedPreferences sharedPreferences;
     public static EmergencyContactsDbHelper emergencyContactsDbHelper;
 
 
@@ -50,10 +51,19 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        Intent intent = new Intent(MainActivity.this , SignUpActivity.class);
-        startActivity(intent);
 
         emergencyContactsDbHelper = new EmergencyContactsDbHelper(this);
+
+        sharedPreferences = this.getSharedPreferences("com.example.alertika" , MODE_PRIVATE);
+        String check  = sharedPreferences.getString("firstTime", "yes");
+        if(check.equals("yes")){
+            Intent intent = new Intent(MainActivity.this , SignUpActivity.class);
+            sharedPreferences.edit().putString("firstTime" , "no").apply();
+            startActivity(intent);
+        }
+
+
+
     }
 
     @Override

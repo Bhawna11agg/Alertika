@@ -1,6 +1,9 @@
 package com.example.alertika;
 
+import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.alertika.data.EmergencyContactsDbHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
@@ -16,6 +19,9 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static EmergencyContactsDbHelper emergencyContactsDbHelper;
+
 
     private AppBarConfiguration mAppBarConfiguration;
     @Override
@@ -44,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        Intent intent = new Intent(MainActivity.this , SignUpActivity.class);
+        startActivity(intent);
+
+        emergencyContactsDbHelper = new EmergencyContactsDbHelper(this);
     }
 
     @Override

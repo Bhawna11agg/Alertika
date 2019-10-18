@@ -10,6 +10,8 @@ public final class ContactsContract {
 
         public static final String TABLE_NAME  = "emergencycontacts";
 
+        public static final String _ID = "id";
+
         public static final String COLUMN_CONTACTNAME =  "name";
 
         public static final String COLUMN_MOBILE = "mobileno";
